@@ -1,0 +1,4 @@
+#!/usr/bin/env bash
+
+SCONE_REGISTRY_USERNAME=""
+SCONE_REGISTRY_TOKEN=""

@@ -1,0 +1,37 @@
+version: "3.3"
+
+
+
+services: 
+  postgres:
+    image: postgres:latest
+    container_name: postgres
+    environment:
+      - POSTGRES_USER=user01
+      - POSTGRES_PASSWORD=user01
+    volumes:
+      - postgres-data:/var/lib/postgresql/data
+    # ports:
+    #   - 127.0.0.1:5432:5432
+    networks: 
+      - todo-network
+    restart: unless-stopped
+  
+  todobackend:
+    build: 
+      context: .
+    depends_on: 
+      - postgres
+    ports: 
+      - 127.0.0.1:8080:8080
+    networks: 
+      - todo-network
+    devices:
+      - "/dev/isgx:/dev/isgx"
+
+volumes:
+  postgres-data:
+    # name: postgres-data
+
+networks:
+  todo-network:
